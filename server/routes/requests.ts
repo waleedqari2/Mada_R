@@ -44,8 +44,13 @@ router.post('/', async (req: Request, res: Response) => {
     } = req.body;
 
     // Validate required fields
-    if (!paymentType || !requesterName || !jobTitle || !department || !approverDepartment || amountInNumbers === undefined) {
+    if (!paymentType || !requesterName || !jobTitle || !department || !approverDepartment) {
       return res.status(400).json({ error: 'جميع الحقول مطلوبة' });
+    }
+    
+    // Validate amount
+    if (amountInNumbers === undefined || isNaN(Number(amountInNumbers)) || Number(amountInNumbers) <= 0) {
+      return res.status(400).json({ error: 'يجب إدخال مبلغ صحيح أكبر من صفر' });
     }
 
     // Generate request number and convert amount to words

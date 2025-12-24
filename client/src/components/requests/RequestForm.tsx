@@ -11,27 +11,21 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PAYMENT_TYPES, DEPARTMENTS, PaymentType, DepartmentType, Request } from "@shared/const";
+import { RequestInput } from "@/hooks/api/useRequests";
 import { Save, X } from "lucide-react";
 import { toast } from "sonner";
 
 interface RequestFormProps {
   request?: Request | null;
-  onSubmit: (data: RequestFormData) => Promise<void>;
+  onSubmit: (data: RequestInput) => Promise<void>;
   onCancel?: () => void;
   mode?: 'create' | 'edit';
 }
 
-export interface RequestFormData {
-  paymentType: PaymentType;
-  requesterName: string;
-  jobTitle: string;
-  department: DepartmentType;
-  approverDepartment: DepartmentType;
-  amountInNumbers: number;
-}
+export type { RequestInput } from "@/hooks/api/useRequests";
 
 export default function RequestForm({ request, onSubmit, onCancel, mode = 'create' }: RequestFormProps) {
-  const [formData, setFormData] = useState<RequestFormData>({
+  const [formData, setFormData] = useState<RequestInput>({
     paymentType: 'نقدي',
     requesterName: '',
     jobTitle: '',
@@ -208,10 +202,13 @@ export default function RequestForm({ request, onSubmit, onCancel, mode = 'creat
               <Input
                 id="amountInNumbers"
                 type="number"
-                min="0"
+                min="0.01"
                 step="0.01"
-                value={formData.amountInNumbers}
-                onChange={(e) => setFormData({ ...formData, amountInNumbers: parseFloat(e.target.value) || 0 })}
+                value={formData.amountInNumbers || ''}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setFormData({ ...formData, amountInNumbers: value ? parseFloat(value) : 0 });
+                }}
                 placeholder="0.00"
                 required
               />

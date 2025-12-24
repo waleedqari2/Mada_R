@@ -4,6 +4,15 @@ import { Request } from '@shared/const';
 
 const API_BASE_URL = '/api/requests';
 
+export interface RequestInput {
+  paymentType: string;
+  requesterName: string;
+  jobTitle: string;
+  department: string;
+  approverDepartment: string;
+  amountInNumbers: number;
+}
+
 export function useRequests() {
   const [requests, setRequests] = useState<Request[]>([]);
   const [loading, setLoading] = useState(true);
@@ -61,7 +70,7 @@ export function useRequest(id: number | null) {
   return { request, loading, error };
 }
 
-export async function createRequest(data: Omit<Request, 'id' | 'requestNumber' | 'amountInWords' | 'status' | 'createdAt' | 'updatedAt'>): Promise<Request> {
+export async function createRequest(data: RequestInput): Promise<Request> {
   try {
     const response = await axios.post<Request>(API_BASE_URL, data);
     return response.data;
@@ -71,7 +80,7 @@ export async function createRequest(data: Omit<Request, 'id' | 'requestNumber' |
   }
 }
 
-export async function updateRequest(id: number, data: Partial<Omit<Request, 'id' | 'requestNumber' | 'createdAt' | 'updatedAt'>>): Promise<Request> {
+export async function updateRequest(id: number, data: Partial<RequestInput> & { status?: string }): Promise<Request> {
   try {
     const response = await axios.put<Request>(`${API_BASE_URL}/${id}`, data);
     return response.data;

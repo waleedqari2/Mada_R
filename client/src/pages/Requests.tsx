@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import RequestForm, { RequestFormData } from "@/components/requests/RequestForm";
+import RequestForm from "@/components/requests/RequestForm";
 import RequestsList from "@/components/requests/RequestsList";
 import {
   useRequests,
   createRequest,
   updateRequest,
   deleteRequest,
+  RequestInput,
 } from "@/hooks/api/useRequests";
 import { Request, RequestStatus } from "@shared/const";
 import { Plus, FileText } from "lucide-react";
@@ -17,13 +18,13 @@ export default function RequestsPage() {
   const [showForm, setShowForm] = useState(false);
   const [editingRequest, setEditingRequest] = useState<Request | null>(null);
 
-  const handleCreateRequest = async (data: RequestFormData) => {
+  const handleCreateRequest = async (data: RequestInput) => {
     await createRequest(data);
     setShowForm(false);
     await refetch();
   };
 
-  const handleUpdateRequest = async (data: RequestFormData) => {
+  const handleUpdateRequest = async (data: RequestInput) => {
     if (!editingRequest) return;
     await updateRequest(editingRequest.id, data);
     setEditingRequest(null);
