@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PAYMENT_TYPES, DEPARTMENTS, PaymentType, DepartmentType, Request } from "@/shared/const";
+import { PAYMENT_TYPES, DEPARTMENTS, PaymentType, DepartmentType, Request } from "@shared/const";
 import { Save, X } from "lucide-react";
 import { toast } from "sonner";
 

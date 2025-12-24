@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Request, REQUEST_STATUSES, RequestStatus } from "@/shared/const";
+import { Request, REQUEST_STATUSES, RequestStatus } from "@shared/const";
 import { Edit2, Trash2, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import {

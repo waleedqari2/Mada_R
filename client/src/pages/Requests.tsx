@@ -8,7 +8,7 @@ import {
   updateRequest,
   deleteRequest,
 } from "@/hooks/api/useRequests";
-import { Request, RequestStatus } from "@/shared/const";
+import { Request, RequestStatus } from "@shared/const";
 import { Plus, FileText } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 

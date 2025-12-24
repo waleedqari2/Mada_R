@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { Request } from '@/shared/const';
+import { Request } from '@shared/const';
 
 const API_BASE_URL = '/api/requests';
 
