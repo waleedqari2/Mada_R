@@ -8,6 +8,8 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import RequestsList from "./pages/RequestsList";
+import RequestForm from "./pages/RequestForm";
 
 
 function Router() {
@@ -16,6 +18,8 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/login"} component={Login} />
       <Route path={"/dashboard"} component={Dashboard} />
+      <Route path={"/requests"} component={RequestsList} />
+      <Route path={"/requests/new"} component={RequestForm} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
