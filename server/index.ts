@@ -40,14 +40,21 @@ async function startServer() {
   app.use(express.json({ limit: "10mb" }));
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-  // Rate limiting
-  const limiter = rateLimit({
+  // Rate limiting for API routes
+  const apiLimiter = rateLimit({
     windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || "900000"), // 15 minutes
     max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || "100"),
     message: "Too many requests from this IP, please try again later.",
   });
 
-  app.use("/api/", limiter);
+  // Rate limiting for static files (more lenient)
+  const staticLimiter = rateLimit({
+    windowMs: 60000, // 1 minute
+    max: 100, // 100 requests per minute
+    message: "Too many requests from this IP, please slow down.",
+  });
+
+  app.use("/api/", apiLimiter);
 
   // API Routes
   app.use("/api/auth", authRoutes);
@@ -67,6 +74,8 @@ async function startServer() {
       ? path.resolve(__dirname, "public")
       : path.resolve(__dirname, "..", "dist", "public");
 
+  // Apply rate limiting to static files
+  app.use(staticLimiter);
   app.use(express.static(staticPath));
 
   // Handle client-side routing - serve index.html for all non-API routes
