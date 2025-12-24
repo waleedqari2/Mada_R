@@ -8,7 +8,7 @@ import { logAction } from '../utils/auditLog.js';
 const router = express.Router();
 
 // Get all requests with pagination and filters
-router.get('/', authenticate, async (req: AuthRequest, res: Response, next) => {
+router.get('/', authenticate, async (req: AuthRequest, res: Response, next: any) => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 20;
@@ -85,7 +85,7 @@ router.get('/', authenticate, async (req: AuthRequest, res: Response, next) => {
 });
 
 // Get single request by ID
-router.get('/:id', authenticate, async (req: AuthRequest, res: Response, next) => {
+router.get('/:id', authenticate, async (req: AuthRequest, res: Response, next: any) => {
   try {
     const { id } = req.params;
 
@@ -161,7 +161,7 @@ router.post(
     body('items.*.unit_price').isFloat({ min: 0 }).withMessage('السعر يجب أن تكون رقم موجب'),
   ],
   validate,
-  async (req: AuthRequest, res: Response, next) => {
+  async (req: AuthRequest, res: Response, next: any) => {
     try {
       if (!req.user) {
         res.status(401).json({ error: 'غير مصرح' });
@@ -227,7 +227,7 @@ router.put(
     body('items').optional().isArray(),
   ],
   validate,
-  async (req: AuthRequest, res: Response, next) => {
+  async (req: AuthRequest, res: Response, next: any) => {
     try {
       if (!req.user) {
         res.status(401).json({ error: 'غير مصرح' });
@@ -330,7 +330,7 @@ router.put(
 );
 
 // Delete request
-router.delete('/:id', authenticate, async (req: AuthRequest, res: Response, next) => {
+router.delete('/:id', authenticate, async (req: AuthRequest, res: Response, next: any) => {
   try {
     if (!req.user) {
       res.status(401).json({ error: 'غير مصرح' });
@@ -381,7 +381,7 @@ router.patch(
     body('notes').optional().trim(),
   ],
   validate,
-  async (req: AuthRequest, res: Response, next) => {
+  async (req: AuthRequest, res: Response, next: any) => {
     try {
       if (!req.user) {
         res.status(401).json({ error: 'غير مصرح' });

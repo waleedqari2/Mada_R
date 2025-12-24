@@ -18,7 +18,7 @@ export interface AuthRequest extends Request {
 // Generate JWT token
 export function generateToken(payload: UserPayload): string {
   const expiresIn = process.env.JWT_EXPIRY || '7d';
-  return jwt.sign(payload, JWT_SECRET, { expiresIn });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn } as jwt.SignOptions);
 }
 
 // Verify JWT token

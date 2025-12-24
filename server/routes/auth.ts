@@ -20,7 +20,7 @@ router.post(
     body('phone').optional().trim(),
   ],
   validate,
-  async (req, res, next) => {
+  async (req: any, res: any, next: any) => {
     try {
       const { username, email, password, full_name, department, phone } = req.body;
 
@@ -81,7 +81,7 @@ router.post(
     body('password').notEmpty().withMessage('كلمة المرور مطلوبة'),
   ],
   validate,
-  async (req, res, next) => {
+  async (req: any, res: any, next: any) => {
     try {
       const { username, password } = req.body;
 
@@ -179,7 +179,7 @@ router.put(
     body('phone').optional().trim(),
   ],
   validate,
-  async (req: AuthRequest, res: Response, next) => {
+  async (req: AuthRequest, res: Response, next: any) => {
     try {
       if (!req.user) {
         res.status(401).json({ error: 'غير مصرح' });
