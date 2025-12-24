@@ -94,7 +94,13 @@ CREATE TABLE IF NOT EXISTS notifications (
   INDEX idx_createdAt (createdAt)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Insert default admin user (password: admin123 - should be changed in production)
+-- Insert default admin user (password: admin123 - MUST BE CHANGED IMMEDIATELY IN PRODUCTION)
+-- ⚠️ SECURITY WARNING: This creates a default admin account for initial setup only.
+-- ⚠️ Please change the password immediately after first login or remove this line in production.
 INSERT INTO users (username, password, email, role) VALUES 
 ('admin', '$2b$10$lTiWEcuRhK.fiwV.p1oNxO7E/9qtZArCGO0NOpa8ERkqMVxozufSu', 'admin@mada.sa', 'admin')
 ON DUPLICATE KEY UPDATE username=username;
+
+-- ⚠️ IMPORTANT: After setting up the database, either:
+-- 1. Change the admin password immediately using the application
+-- 2. Or delete this INSERT statement and create admin users manually

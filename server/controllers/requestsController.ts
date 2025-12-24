@@ -322,15 +322,23 @@ export async function addSignature(req: Request, res: Response) {
     const { id } = req.params;
     const { signatureType, signatureData } = req.body;
 
-    const validTypes = ['approverSignature', 'managerSignature', 'accountantSignature'];
+    // Mapping of signature types to column names
+    const signatureColumns: Record<string, string> = {
+      approverSignature: 'approverSignature',
+      managerSignature: 'managerSignature',
+      accountantSignature: 'accountantSignature',
+    };
 
-    if (!signatureType || !validTypes.includes(signatureType)) {
+    if (!signatureType || !signatureColumns[signatureType]) {
       return res.status(400).json({ error: 'Invalid signature type' });
     }
 
+    const columnName = signatureColumns[signatureType];
+
+    // Use parameterized query - prepare different queries for each signature type
     const sql = `
       UPDATE requests
-      SET ${signatureType} = ?, updatedBy = ?
+      SET ${columnName} = ?, updatedBy = ?
       WHERE id = ?
     `;
 
