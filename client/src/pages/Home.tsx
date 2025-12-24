@@ -41,11 +41,13 @@ import {
   Trash2,
   CheckCircle2,
   Clock,
-  UserCheck
+  UserCheck,
+  Settings
 } from "lucide-react";
 import { useState, useRef } from "react";
 import { toast } from "sonner";
 import { generateExpensePDF } from "@/lib/pdfExporter";
+import { Link } from "wouter";
 
 interface ExpenseItem {
   id: number;
@@ -219,6 +221,12 @@ export default function Home() {
               </div>
             </div>
             <div className="flex gap-3">
+              <Link href="/requests">
+                <Button variant="outline" className="gap-2">
+                  <Settings className="w-4 h-4" />
+                  إدارة الطلبات
+                </Button>
+              </Link>
               <Button onClick={handleExportPDF} className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
                 <FileText className="w-4 h-4" />
                 تصدير PDF
