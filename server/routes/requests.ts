@@ -51,12 +51,13 @@ router.post('/', async (req: Request, res: Response) => {
     // Generate request number and convert amount to words
     const requestNumber = await generateRequestNumber();
     const amountInWords = numberToArabicWords(Number(amountInNumbers));
+    const defaultStatus = 'في انتظار التعميد';
 
     const [result] = await pool.query<ResultSetHeader>(
       `INSERT INTO requests 
-      (requestNumber, paymentType, requesterName, jobTitle, department, approverDepartment, amountInNumbers, amountInWords) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [requestNumber, paymentType, requesterName, jobTitle, department, approverDepartment, amountInNumbers, amountInWords]
+      (requestNumber, paymentType, requesterName, jobTitle, department, approverDepartment, amountInNumbers, amountInWords, status) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [requestNumber, paymentType, requesterName, jobTitle, department, approverDepartment, amountInNumbers, amountInWords, defaultStatus]
     );
 
     // Fetch the created request
