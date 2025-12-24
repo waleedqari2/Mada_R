@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import RequestsList from "./pages/RequestsList";
 import RequestForm from "./pages/RequestForm";
+import Reports from "./pages/Reports";
 
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
       <Route path={"/dashboard"} component={Dashboard} />
       <Route path={"/requests"} component={RequestsList} />
       <Route path={"/requests/new"} component={RequestForm} />
+      <Route path={"/reports"} component={Reports} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

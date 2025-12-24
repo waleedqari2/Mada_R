@@ -96,5 +96,5 @@ CREATE TABLE IF NOT EXISTS notifications (
 
 -- Insert default admin user (password: admin123 - should be changed in production)
 INSERT INTO users (username, password, email, role) VALUES 
-('admin', '$2a$10$YQ6GJ5vGK5z8ZQ9mY5Z8Ze5Z8Ze5Z8Ze5Z8Ze5Z8Ze5Z8Ze5Z8Ze5', 'admin@mada.sa', 'admin')
+('admin', '$2b$10$lTiWEcuRhK.fiwV.p1oNxO7E/9qtZArCGO0NOpa8ERkqMVxozufSu', 'admin@mada.sa', 'admin')
 ON DUPLICATE KEY UPDATE username=username;
