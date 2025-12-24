@@ -24,11 +24,11 @@ interface RequestData {
 // Generate a unique request number
 async function generateRequestNumber(): Promise<string> {
   const [rows] = await pool.query<RowDataPacket[]>(
-    'SELECT COUNT(*) as count FROM requests'
+    'SELECT COALESCE(MAX(id), 0) as maxId FROM requests'
   );
-  const count = rows[0].count + 1;
+  const nextNum = rows[0].maxId + 1;
   const year = new Date().getFullYear();
-  return `REQ-${year}-${String(count).padStart(5, '0')}`;
+  return `REQ-${year}-${String(nextNum).padStart(5, '0')}`;
 }
 
 // POST /api/requests - Create new request
