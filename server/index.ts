@@ -14,6 +14,7 @@ import authRoutes from "./routes/auth.js";
 import requestsRoutes from "./routes/requests.js";
 import reportsRoutes from "./routes/reports.js";
 import auditLogsRoutes from "./routes/auditLogs.js";
+import notificationsRoutes from "./routes/notifications.js";
 
 // Load environment variables
 dotenv.config();
@@ -53,6 +54,7 @@ async function startServer() {
   app.use("/api/requests", requestsRoutes);
   app.use("/api/reports", reportsRoutes);
   app.use("/api/audit-logs", auditLogsRoutes);
+  app.use("/api/notifications", notificationsRoutes);
 
   // Health check endpoint
   app.get("/api/health", (_req, res) => {
