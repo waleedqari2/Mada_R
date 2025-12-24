@@ -1,0 +1,39 @@
+# Node modules
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build outputs
+dist
+build
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# OS files
+.DS_Store
+
+# Test files
+coverage
+*.test.js
+*.spec.js
+
+# Documentation
+README.md
+docs
+
+# Development files
+*.md
+.prettierrc
+.eslintrc
+tsconfig.json
